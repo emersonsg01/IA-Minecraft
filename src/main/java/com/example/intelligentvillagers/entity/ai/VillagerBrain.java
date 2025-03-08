@@ -55,6 +55,15 @@ public class VillagerBrain {
      */
     public static void init() {
         IntelligentVillagersMod.LOGGER.info("Initializing VillagerBrain system");
+        
+        // Initialize the equipment system
+        VillagerEquipment.init();
+        
+        // Initialize the inventory system
+        VillagerInventory.init();
+        
+        // Initialize the trading system
+        VillagerTrading.init();
     }
     
     /**
@@ -98,6 +107,15 @@ public class VillagerBrain {
         if (ModConfig.COMMON.enableSocialInteractions.get()) {
             processSocialInteractions(villager);
         }
+        
+        // Update equipment
+        VillagerEquipment.getEquipment(villager).update(villager, this);
+        
+        // Update inventory
+        VillagerInventory.getInventory(villager).update(villager, this);
+        
+        // Update trading
+        VillagerTrading.getTrading(villager).update(villager, this);
     }
     
     /**
